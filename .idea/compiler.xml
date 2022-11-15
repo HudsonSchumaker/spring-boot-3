@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="server" />
+        <module name="payment" />
         <module name="gateway" />
         <module name="order" />
       </profile>
@@ -17,6 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="gateway" options="-parameters" />
       <module name="order" options="-parameters" />
+      <module name="payment" options="-parameters" />
       <module name="server" options="-parameters" />
     </option>
   </component>
