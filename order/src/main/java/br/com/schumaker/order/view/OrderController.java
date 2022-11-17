@@ -51,7 +51,7 @@ public class OrderController {
         return ResponseEntity.ok(dto);
     }
 
-    @PutMapping("/{id}/pago")
+    @PutMapping("/{id}/paid")
     public ResponseEntity<Void> doPayment(@PathVariable @NotNull Long id) {
         service.approvePayment(id);
         return ResponseEntity.noContent().build();

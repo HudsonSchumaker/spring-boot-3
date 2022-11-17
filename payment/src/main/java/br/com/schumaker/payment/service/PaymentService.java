@@ -1,5 +1,6 @@
 package br.com.schumaker.payment.service;
 
+import br.com.schumaker.payment.http.OrderClient;
 import br.com.schumaker.payment.model.PaymentRepository;
 import br.com.schumaker.payment.model.Status;
 import br.com.schumaker.payment.model.dto.PaymentDTO;
@@ -23,7 +24,7 @@ public class PaymentService {
     private ModelMapper modelMapper;
 
     @Autowired
-    private PedidoClient pedido;
+    private OrderClient orderClient;
 
 
     public Page<PaymentDTO> getAll(Pageable pagination) {
@@ -67,9 +68,8 @@ public class PaymentService {
 
         Payment.get().setStatus(Status.CONFIRMED);
         repository.save(Payment.get());
-        pedido.atualizaPayment(Payment.get().getOrderId());
+        orderClient.updatePayment(Payment.get().getOrderId());
     }
-
 
     public void updateStatus(Long id) {
         Optional<Payment> Payment = repository.findById(id);
