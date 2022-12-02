@@ -37,7 +37,7 @@ public class PaymentController {
     @PostMapping
     public ResponseEntity<PaymentDTO> create(@RequestBody @Valid PaymentDTO dto, UriComponentsBuilder uriBuilder) {
         PaymentDTO payment = service.create(dto);
-        URI address = uriBuilder.path("/payments/{id}").buildAndExpand(payment.id()).toUri();
+        URI address = uriBuilder.path("/payments/{id}").buildAndExpand(payment.getId()).toUri();
 
         return ResponseEntity.created(address).body(payment);
     }
