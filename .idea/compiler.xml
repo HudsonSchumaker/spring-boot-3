@@ -10,12 +10,14 @@
         <module name="server" />
         <module name="payment" />
         <module name="gateway" />
+        <module name="finance" />
         <module name="order" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="finance" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="order" options="-parameters" />
       <module name="payment" options="-parameters" />
