@@ -6,17 +6,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.math.BigDecimal;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "payments")
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "payments")
 public class Payment {
 
     @Id
