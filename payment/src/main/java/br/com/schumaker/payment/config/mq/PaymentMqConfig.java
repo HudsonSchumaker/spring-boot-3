@@ -15,11 +15,6 @@ import org.springframework.context.annotation.Bean;
 public class PaymentMqConfig {
 
     @Bean
-    public Queue createPaymentQueue() {
-        return QueueBuilder.nonDurable("payment.done").build();
-    }
-
-    @Bean
     public RabbitAdmin createRabbitAdmin(ConnectionFactory conn) {
         return new RabbitAdmin(conn);
     }
@@ -27,6 +22,11 @@ public class PaymentMqConfig {
     @Bean
     public ApplicationListener<ApplicationReadyEvent> initAdmin(RabbitAdmin rabbitAdmin) {
         return event -> rabbitAdmin.initialize();
+    }
+
+    @Bean
+    public Queue createPaymentQueue() {
+        return QueueBuilder.nonDurable("payment.done").build();
     }
 
     @Bean
