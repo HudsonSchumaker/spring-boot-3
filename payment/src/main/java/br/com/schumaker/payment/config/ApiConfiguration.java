@@ -14,6 +14,7 @@ public class ApiConfiguration {
         mapper.getConfiguration()
                 .setFieldMatchingEnabled(true)
                 .setFieldAccessLevel(AccessLevel.PRIVATE);
+
         return mapper;
     }
 }
