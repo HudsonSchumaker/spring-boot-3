@@ -7,6 +7,7 @@ import br.com.schumaker.payment.model.dto.PaymentDTO;
 import br.com.schumaker.payment.model.entity.Payment;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,9 @@ public class PaymentService {
     @Autowired
     private OrderClient orderClient;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
 
     public Page<PaymentDTO> getAll(Pageable pagination) {
         return repository
@@ -44,6 +48,7 @@ public class PaymentService {
         Payment Payment = modelMapper.map(dto, Payment.class);
         Payment.setStatus(Status.CREATED);
         repository.save(Payment);
+        rabbitTemplate.convertAndSend("payment.done", Payment);
 
         return modelMapper.map(Payment, PaymentDTO.class);
     }
