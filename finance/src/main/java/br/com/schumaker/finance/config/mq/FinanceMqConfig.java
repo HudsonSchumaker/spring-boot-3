@@ -10,6 +10,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/*
+ * @author Hudson Schumaker
+ */
+
 @Configuration
 public class FinanceMqConfig {
 
