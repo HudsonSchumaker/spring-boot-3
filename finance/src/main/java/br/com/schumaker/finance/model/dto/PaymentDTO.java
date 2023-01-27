@@ -6,6 +6,10 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 
+/*
+@author Hudson Schumaker
+ */
+
 @Getter
 @Setter
 @ToString
