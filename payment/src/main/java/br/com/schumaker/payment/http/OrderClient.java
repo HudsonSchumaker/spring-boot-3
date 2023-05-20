@@ -10,4 +10,3 @@ public interface OrderClient {
     @RequestMapping(method = RequestMethod.PUT, value = "/orders/{id}/paid")
     void updatePayment(@PathVariable Long id);
 }
-
