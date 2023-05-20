@@ -8,7 +8,6 @@ import br.com.schumaker.payment.model.entity.Payment;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -43,7 +42,7 @@ public class PaymentService {
 
     public PaymentDTO getById(Long id) {
         Payment Payment = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException());
+                .orElseThrow(EntityNotFoundException::new);
 
         return modelMapper.map(Payment, PaymentDTO.class);
     }
@@ -72,7 +71,7 @@ public class PaymentService {
     public void confirm(Long id){
         Optional<Payment> Payment = repository.findById(id);
 
-        if (!Payment.isPresent()) {
+        if (Payment.isEmpty()) {
             throw new EntityNotFoundException();
         }
 
