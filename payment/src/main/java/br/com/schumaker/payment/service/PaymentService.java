@@ -18,18 +18,22 @@ import java.util.Optional;
 @Service
 public class PaymentService {
 
-    @Autowired
-    private PaymentRepository repository;
+    private final PaymentRepository repository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private OrderClient orderClient;
+    private final OrderClient orderClient;
 
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
+    public PaymentService(PaymentRepository repository, ModelMapper modelMapper, OrderClient orderClient,
+                          RabbitTemplate rabbitTemplate) {
+
+        this.repository = repository;
+        this.modelMapper = modelMapper;
+        this.orderClient = orderClient;
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
     public Page<PaymentDTO> getAll(Pageable pagination) {
         return repository
