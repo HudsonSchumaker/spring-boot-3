@@ -5,7 +5,6 @@ import br.com.schumaker.order.model.dto.OrderDTO;
 import br.com.schumaker.order.service.OrderService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +17,11 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    @Autowired
-    private OrderService service;
+    private final OrderService service;
+
+    public OrderController(OrderService service) {
+        this.service = service;
+    }
 
     @GetMapping()
     public List<OrderDTO> listAll() {
@@ -55,6 +57,5 @@ public class OrderController {
     public ResponseEntity<Void> doPayment(@PathVariable @NotNull Long id) {
         service.approvePayment(id);
         return ResponseEntity.noContent().build();
-
     }
 }
