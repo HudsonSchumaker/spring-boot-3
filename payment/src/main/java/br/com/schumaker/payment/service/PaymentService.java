@@ -48,7 +48,8 @@ public class PaymentService {
         Payment Payment = modelMapper.map(dto, Payment.class);
         Payment.setStatus(Status.CREATED);
         repository.save(Payment);
-        rabbitTemplate.convertAndSend("payment.done", Payment);
+
+        rabbitTemplate.convertAndSend("payment.ex", "", Payment);
 
         return modelMapper.map(Payment, PaymentDTO.class);
     }

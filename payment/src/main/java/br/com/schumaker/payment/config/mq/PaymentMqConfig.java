@@ -1,5 +1,6 @@
 package br.com.schumaker.payment.config.mq;
 
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Configuration;
@@ -25,8 +26,8 @@ public class PaymentMqConfig {
     }
 
     @Bean
-    public Queue createPaymentQueue() {
-        return QueueBuilder.nonDurable("payment.done").build();
+    public FanoutExchange fanoutExchange(){
+        return new FanoutExchange("payment.ex");
     }
 
     @Bean
