@@ -13,5 +13,4 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query(value = "select o from Order o LEFT JOIN FETCH o.items where o.id = :id")
     Order byIdWithItems(Long id);
-
 }
