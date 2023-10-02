@@ -1,0 +1,41 @@
+version: '3.9'
+services:
+  database:
+    image: "mysql:8.0"
+    container_name: MySQL-8-local
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    environment:
+      - MYSQL_ROOT_PASSWORD=tester
+
+  mq:
+    image: "rabbitmq:3.8-management-alpine"
+    container_name: MQ-3-8-local
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  zookeeper:
+    image: "wurstmeister/zookeeper"
+    container_name: Zookeeper-local
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: "wurstmeister/kafka"
+    container_name: Kafka-local
+    depends_on:
+      - zookeeper
+    ports:
+      - "9101:9101"  # JMX
+      - "9092:9092"  # Kafka
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_ADVERTISED_HOST_NAME: localhost
